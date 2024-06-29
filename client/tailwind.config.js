@@ -1,20 +1,26 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: "class",
+  darkMode: "class", // Enable dark mode using the `class` strategy
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        primary: "#fffcf2", // Cream (Light)
-        secondary: "#ccc5b9", // Pale Silver (Light)
-        accent: "#eb5e28", // Dark Charcoal
-        light: "#252422", // Dark Ebony (Dark)
-        dark: "#403d39", // Burnt Orange (Dark)
-        darkBackground: "#1A1917", // Dark Background Color (for dark mode)
+        primary: "var(--color-primary)",
+        secondary: "var(--color-secondary)",
+        accent: "var(--color-accent)",
+        "accent-dark": "var(--color-accent-dark)",
+        "accent-light": "var(--color-accent-light)",
+        background: "var(--color-background)",
+        text: "var(--color-text)",
+
+        //for dark mode
+        darkBackground: "#1a1917", // Dark mode background
+        darkText: "#fffcf2", // Dark mode text
+        //for light mode
+        lightBackground: "#fff",
+        ligthText: "#000",
       },
     },
   },
-  plugins: [
-    // ...
-  ],
+  plugins: [],
 };

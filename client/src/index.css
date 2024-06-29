@@ -1,4 +1,55 @@
-/* ./src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --color-primary: #fffcf2; /* Cream (Light) */
+  --color-secondary: #ccc5b9; /* Pale Silver (Light) */
+  --color-accent: #eb5e28; /* Dark Charcoal */
+  --color-accent-dark: #c44d1f; /* Dark Tangerine */
+  --color-accent-light: #ff7f50; /* Coral */
+  --color-background: #fff; /* Light Background */
+  --color-text: #252422; /* Dark Text */
+}
+
+body.dark {
+  --color-primary: #252422; /* Dark Text */
+  --color-secondary: #403d39; /* Burnt Orange */
+  --color-accent: #eb5e28; /* Dark Charcoal */
+  --color-accent-dark: #c44d1f; /* Dark Tangerine */
+  --color-accent-light: #ff7f50; /* Coral */
+  --color-background: #1a1917; /* Dark Background */
+  --color-text: #fffcf2; /* Light Text */
+}
+
+/* Utility classes */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+.bg-accent {
+  background-color: var(--color-accent);
+}
+.bg-accent-dark {
+  background-color: var(--color-accent-dark);
+}
+.bg-accent-light {
+  background-color: var(--color-accent-light);
+}
+.bg-background {
+  background-color: var(--color-background);
+}
+.text-primary {
+  color: var(--color-primary);
+}
+.text-secondary {
+  color: var(--color-secondary);
+}
+.text-accent {
+  color: var(--color-accent);
+}
+.text-text {
+  color: var(--color-text);
+}
