@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FaSearch, FaUserCircle, FaBars, FaCog } from "react-icons/fa";
-import { useSelector } from "react-redux";
 import ThemeSettings from "./ThemeSettings";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const { theme, accentColor } = useSelector((state) => state.theme);
 
   return (
     <header className="bg-secondary dark:bg-darkBackground dark:shadow-2xl  shadow-md">
@@ -68,12 +66,18 @@ const Header = () => {
                 <FaUserCircle size={35} />
               </li>
             </NavLink>
-          </ul>
+          </ul>{" "}
+          <button
+            className="text-light dark:text-primary md:hidden"
+            onClick={() => setSettingsOpen(true)}
+          >
+            <FaCog size={25} className="text-accent" />
+          </button>
           <button
             className="sm:hidden text-light dark:text-primary"
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            <FaBars size={25} />
+            <FaBars size={25} className="text-accent" />
           </button>
         </div>
         {menuOpen && (

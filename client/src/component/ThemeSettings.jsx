@@ -2,34 +2,35 @@ import { useSelector, useDispatch } from "react-redux";
 import { setTheme, setAccentColor } from "../redux/reducers/themeSlice";
 
 const colors = [
-  "#eb5e28", // Dark Charcoal
-  "#f4a261", // Light Orange
-  "#e9c46a", // Light Gold
-  "#2a9d8f", // Sea Green
-  "#264653", // Dark Blue Green
-  "#ff7f50", // Coral
-  "#6495ed", // Cornflower Blue
-  "#ff6347", // Tomato
-  "#4682b4", // Steel Blue
-  "#6a5acd", // Slate Blue
-  "#73706d", // Grayish Brown
-  "#7e7b78", // Light Olive
-  "#8b8784", // Taupe
-  "#999491", // Sage
-  "#a8a39f", // Light Beige
-  "#b9b3af", // Warm Gray
-  "#cbc5c0", // Soft Gray
-  "#dfd9d3", // Light Cream
-  "#f5efe8", // Off White
+  "#eb5e28",
+  "#f4a261",
+  "#e9c46a",
+  "#2a9d8f",
+  "#264653",
+  "#ff7f50",
+  "#6495ed",
+  "#ff6347",
+  "#4682b4",
+  "#6a5acd",
+  "#73706d",
+  "#7e7b78",
+  "#8b8784",
+  "#999491",
+  "#a8a39f",
+  "#b9b3af",
+  "#cbc5c0",
+  "#dfd9d3",
+  "#f5efe8",
   "#3321c8",
   "#BFEF0B",
   "#EF0B23",
+  "#e0afa0",
 ];
 
 // eslint-disable-next-line react/prop-types
 const ThemeSettings = ({ onClose }) => {
   const dispatch = useDispatch();
-  const { theme, accentColor } = useSelector((state) => state.theme);
+  const { theme } = useSelector((state) => state.theme);
 
   const handleThemeChange = (newTheme) => {
     dispatch(setTheme(newTheme));
@@ -45,7 +46,7 @@ const ThemeSettings = ({ onClose }) => {
       onClick={onClose}
     >
       <div
-        className="bg-white dark:bg-darkBackground p-4 rounded shadow-lg w-[20%]"
+        className="bg-white dark:bg-darkBackground p-4 rounded shadow-lg w-[25%]"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-lg mb-4 dark:text-white">Theme Settings</h2>

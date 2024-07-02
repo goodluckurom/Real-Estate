@@ -5,6 +5,18 @@ const initialState = {
   accentColor: localStorage.getItem("accentColor") || "#eb5e28",
 };
 
+const applyAccentColor = (color) => {
+  document.documentElement.style.setProperty("--color-accent", color);
+  document.documentElement.style.setProperty(
+    "--color-accent-dark",
+    shadeColor(color, -20)
+  );
+  document.documentElement.style.setProperty(
+    "--color-accent-light",
+    shadeColor(color, 20)
+  );
+};
+
 const themeSlice = createSlice({
   name: "theme",
   initialState,
@@ -31,18 +43,7 @@ const themeSlice = createSlice({
     setAccentColor: (state, action) => {
       state.accentColor = action.payload;
       localStorage.setItem("accentColor", action.payload);
-      document.documentElement.style.setProperty(
-        "--color-accent",
-        action.payload
-      );
-      document.documentElement.style.setProperty(
-        "--color-accent-dark",
-        shadeColor(action.payload, -20)
-      );
-      document.documentElement.style.setProperty(
-        "--color-accent-light",
-        shadeColor(action.payload, 20)
-      );
+      applyAccentColor(action.payload);
     },
   },
 });
@@ -70,3 +71,12 @@ const shadeColor = (color, percent) => {
       .slice(1)
   );
 };
+
+// Apply initial theme and accent color on load
+document.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("theme") || "light";
+  document.documentElement.classList.add(savedTheme);
+
+  const savedAccentColor = localStorage.getItem("accentColor") || "#eb5e28";
+  applyAccentColor(savedAccentColor);
+});

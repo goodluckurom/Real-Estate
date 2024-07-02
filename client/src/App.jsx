@@ -32,14 +32,13 @@ const App = () => {
   return (
     <Router>
       <div className="min-h-screen bg-lightBackground dark:bg-darkBackground text-text dark:text-darkText">
-        <Header onSettingsClick={() => setSettingsOpen(true)} />{" "}
-        {/* <ThemeToggle /> */}
+        <Header onSettingsClick={() => setSettingsOpen(true)} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/login" element={<SignIn />} />
-          <Route path="/register" element={<SignUp />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
         </Routes>
       </div>
       {settingsOpen && <ThemeSettings onClose={() => setSettingsOpen(false)} />}
