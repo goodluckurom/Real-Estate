@@ -1,13 +1,21 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
+  const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData({
@@ -18,11 +26,12 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError(null);
+    // setLoading(true);
+    // setError(null);
     setMessage(null);
 
     try {
+      dispatch(signInStart());
       const { data } = await axios.post(`/api/auth/sign-in`, formData, {
         headers: {
           "Content-Type": "application/json",
@@ -32,17 +41,15 @@ const SignIn = () => {
       console.log(data);
       setMessage(data.message);
 
-      if (!data.success === false) {
-        setError(data.message);
-      } else {
-        setTimeout(() => {
-          navigate("/");
-        }, 2000);
+      if (data.success === false) {
+        dispatch(signInFailure(data.message));
       }
+      dispatch(signInSuccess(data));
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     } catch (error) {
-      setError(error.response?.data?.message || error.message);
-    } finally {
-      setLoading(false);
+      dispatch(signInFailure(error.response?.data?.message || error.message));
     }
   };
 
@@ -70,6 +77,7 @@ const SignIn = () => {
           <button
             type="submit"
             className="mt-4 p-3 bg-accent text-white rounded-lg transition-colors"
+            disabled={loading}
           >
             {loading ? "Loading..." : "Sign In"}
           </button>

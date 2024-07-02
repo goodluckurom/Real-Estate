@@ -1,4 +1,3 @@
-const bcrypt = require("bcrypt");
 const User = require("../model/User");
 const errorHandler = require("../utils/error");
 const jwt = require("jsonwebtoken");
@@ -25,7 +24,7 @@ exports.signUp = async (req, res, next) => {
     await newUser.save();
 
     res.status(201).json({
-      message: "user created successfully!...",
+      message: "User created successfully!",
     });
   } catch (error) {
     next(error);
@@ -40,18 +39,21 @@ exports.signIn = async (req, res, next) => {
 
     if (!user) {
       return res.status(404).json({
-        message: "user not found...",
+        message: "User not found",
       });
     }
-    const isPasswordValid = user.comparePassword(password, user.password);
+
+    const isPasswordValid = await user.comparePassword(password);
 
     if (!isPasswordValid) {
       return res.status(400).json({
-        message: "invalid password...",
+        message: "Invalid password",
       });
     }
 
-    const token = jwt.sign({ id: user._id }, "thuhesiuhhihdfuhipuhduhu");
+    const token = jwt.sign({ id: user._id }, "process.env.JWT_SECRET", {
+      expiresIn: "1h",
+    });
 
     const { password: pass, ...rest } = user._doc;
 
@@ -67,7 +69,7 @@ exports.signIn = async (req, res, next) => {
 exports.signOut = async (req, res, next) => {
   try {
     res.clearCookie("access_token");
-    res.status(200).json("User has been logged out!..");
+    res.status(200).json("User has been logged out!");
   } catch (error) {
     next(error);
   }

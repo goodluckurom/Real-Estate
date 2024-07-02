@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      select: false, // Ensure password is not returned by default
     },
     avatar: {
       type: String,
@@ -33,7 +34,7 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-UserSchema.methods.comparePassword = async function (enteredPassword) {
+UserSchema.methods.comparePassword = function (enteredPassword) {
   return bcrypt.compare(enteredPassword, this.password);
 };
 
