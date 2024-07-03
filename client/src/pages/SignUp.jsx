@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import OAuth from "../component/OAuth";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({});
@@ -82,7 +83,8 @@ const SignUp = () => {
             className="mt-4 p-3 bg-accent text-white rounded-lg  transition-colors"
           >
             {loading ? "Loading..." : "Sign Up"}
-          </button>
+          </button>{" "}
+          <OAuth />
           {message && <p className="text-green-600 text-center">{message}</p>}
           {error && <p className="text-red-500 text-center">{error}</p>}{" "}
         </form>

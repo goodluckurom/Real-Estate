@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 const App = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const { theme } = useSelector((state) => state.theme);
+  const { isAuth } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (theme === "system") {

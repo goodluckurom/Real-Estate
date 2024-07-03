@@ -2,12 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   currentUser: null,
+  isAuth: false,
   loading: false,
   error: null,
 };
 
 const userSlice = createSlice({
-  name: "User",
+  name: "user",
   initialState,
   reducers: {
     signInStart: (state) => {
@@ -15,6 +16,7 @@ const userSlice = createSlice({
     },
     signInSuccess: (state, action) => {
       state.currentUser = action.payload;
+      state.isAuth = true;
       state.loading = false;
       state.error = null;
     },

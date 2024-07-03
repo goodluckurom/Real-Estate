@@ -7,11 +7,11 @@ import {
   signInSuccess,
   signInFailure,
 } from "../redux/user/userSlice";
+import OAuth from "../component/OAuth";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(null);
+
   const [message, setMessage] = useState(null);
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -26,8 +26,7 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setLoading(true);
-    // setError(null);
+
     setMessage(null);
 
     try {
@@ -81,6 +80,7 @@ const SignIn = () => {
           >
             {loading ? "Loading..." : "Sign In"}
           </button>
+          <OAuth />
           {message && <p className="text-green-600 text-center">{message}</p>}
           {error && <p className="text-red-500 mt-2 text-center">{error}</p>}
         </form>

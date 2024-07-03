@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { FaSearch, FaUserCircle, FaBars, FaCog } from "react-icons/fa";
+import { FaSearch, FaBars, FaCog, FaSignInAlt } from "react-icons/fa";
 import ThemeSettings from "./ThemeSettings";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-
+  const { currentUser } = useSelector((state) => state.user);
+  console.log(currentUser);
   return (
     <header className="bg-secondary dark:bg-darkBackground dark:shadow-2xl  shadow-md">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-4">
@@ -57,14 +59,24 @@ const Header = () => {
               <FaCog size={25} className="text-accent" />
             </button>
             <NavLink
-              to="/profile"
+              to={currentUser ? "/profile" : "/sign-in"}
               className={({ isActive }) =>
-                isActive ? "text-accent" : "text-light dark:text-primary"
+                isActive
+                  ? "text-accent"
+                  : "text-light dark:text-primary flex items-center"
               }
             >
-              <li>
-                <FaUserCircle size={35} />
-              </li>
+              {currentUser ? (
+                <img
+                  src={currentUser.data.avatar}
+                  alt="profile"
+                  className="rounded-full h-8 w-8 object-cover"
+                />
+              ) : (
+                <li>
+                  <FaSignInAlt size={25} color="text-accent" />
+                </li>
+              )}
             </NavLink>
           </ul>{" "}
           <button
@@ -98,18 +110,22 @@ const Header = () => {
             >
               <li>About</li>
             </NavLink>
+
             <NavLink
-              to="/profile"
+              to={currentUser ? "/profile" : "/sign-in"}
               className={({ isActive }) =>
                 isActive
                   ? "text-accent"
                   : "text-light dark:text-primary flex items-center"
               }
             >
-              <li className="flex items-center">
-                <FaUserCircle size={20} className="mr-2" />
-                Profile
-              </li>
+              {currentUser ? (
+                <img src={currentUser.avatar} alt="profile" />
+              ) : (
+                <li>
+                  <FaSignInAlt size={25} color="text-accent" />
+                </li>
+              )}
             </NavLink>
           </ul>
         )}
