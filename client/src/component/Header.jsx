@@ -8,7 +8,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
-  console.log(currentUser);
+
   return (
     <header className="bg-secondary dark:bg-darkBackground dark:shadow-2xl  shadow-md">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-4">
@@ -63,7 +63,7 @@ const Header = () => {
               className={({ isActive }) =>
                 isActive
                   ? "text-accent"
-                  : "text-light dark:text-primary flex items-center"
+                  : "text-accent dark:text-primary flex items-center"
               }
             >
               {currentUser ? (
@@ -105,7 +105,7 @@ const Header = () => {
             <NavLink
               to="/about"
               className={({ isActive }) =>
-                isActive ? "text-accent" : "text-light dark:text-primary"
+                isActive ? "text-accent" : "text-accent dark:text-primary"
               }
             >
               <li>About</li>

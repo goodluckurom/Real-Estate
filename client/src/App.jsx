@@ -8,11 +8,12 @@ import SignUp from "./pages/SignUp";
 import { useEffect, useState } from "react";
 import ThemeSettings from "./component/ThemeSettings";
 import { useSelector } from "react-redux";
+import ProtectedRoute from "./component/ProtectedRoute";
+import RedirectIfAuthenticated from "./component/RedirectIfAuthenticated";
 
 const App = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const { theme } = useSelector((state) => state.theme);
-  const { isAuth } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (theme === "system") {
@@ -37,9 +38,21 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
+
+          {/* protected routes */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+
+          {/* redirect routes.. */}
+          <Route
+            path="/sign-in"
+            element={<RedirectIfAuthenticated element={SignIn} />}
+          />
+          <Route
+            path="/sign-up"
+            element={<RedirectIfAuthenticated element={SignUp} />}
+          />
         </Routes>
       </div>
       {settingsOpen && <ThemeSettings onClose={() => setSettingsOpen(false)} />}
