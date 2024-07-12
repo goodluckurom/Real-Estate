@@ -68,13 +68,13 @@ const Header = () => {
             >
               {currentUser ? (
                 <img
-                  src={currentUser.data.avatar}
+                  src={currentUser && currentUser.avatar}
                   alt="profile"
                   className="rounded-full h-8 w-8 object-cover"
                 />
               ) : (
                 <li>
-                  <FaSignInAlt size={25} color="text-accent" />
+                  <FaSignInAlt size={25} color="text-accent dark:text-accent" />
                 </li>
               )}
             </NavLink>
@@ -114,9 +114,7 @@ const Header = () => {
             <NavLink
               to={currentUser ? "/profile" : "/sign-in"}
               className={({ isActive }) =>
-                isActive
-                  ? "text-accent"
-                  : "text-light dark:text-primary flex items-center"
+                isActive ? "text-accent" : "text-light flex items-center"
               }
             >
               {currentUser ? (

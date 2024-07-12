@@ -55,21 +55,21 @@ const SignUp = () => {
             id="username"
             placeholder="Username"
             onChange={handleChange}
-            className="dark:bg-darkBackground dark:text-darkText border-2 border-accent p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-light"
+            className="dark:bg-darkBackground dark:text-darkText  p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-light"
           />
           <input
             type="email"
             id="email"
             placeholder="Email Address"
             onChange={handleChange}
-            className="dark:bg-darkBackground dark:text-darkText border-2 border-accent p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-light"
+            className="dark:bg-darkBackground dark:text-darkText  p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-light"
           />
           <input
             type="password"
             id="password"
             placeholder="Password"
             onChange={handleChange}
-            className="dark:bg-darkBackground dark:text-darkText border-2 border-accent p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-light"
+            className="dark:bg-darkBackground dark:text-darkText  p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-light"
           />
           <input
             type="password"

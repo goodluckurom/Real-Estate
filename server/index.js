@@ -24,8 +24,10 @@ connectDB();
 
 //routes
 const authRouter = require("./routes/auth.routes.js");
+const userRouter = require("./routes/user.route.js");
 
 app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
 
 //server
 const port = process.env.PORT;

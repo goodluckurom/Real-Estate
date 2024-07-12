@@ -64,14 +64,14 @@ const SignIn = () => {
             id="email"
             placeholder="Email Address"
             onChange={handleChange}
-            className="dark:bg-darkBackground dark:text-darkText border-2 border-accent p-3 rounded-lg focus:outline-none"
+            className="dark:bg-darkBackground dark:text-darkText p-3 rounded-lg focus:outline-none"
           />
           <input
             type="password"
             id="password"
             placeholder="Password"
             onChange={handleChange}
-            className="dark:bg-darkBackground dark:text-darkText border-2 border-accent p-3 rounded-lg focus:outline-none"
+            className="dark:bg-darkBackground dark:text-darkText p-3 rounded-lg focus:outline-none"
           />
           <button
             type="submit"

@@ -4,6 +4,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { signInSuccess } from "../redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
+
 const OAuth = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,18 +17,19 @@ const OAuth = () => {
       const result = await signInWithPopup(auth, provider);
       const { email, displayName, photoURL } = result.user;
 
-      const res = await axios.post("/api/auth/sign-in-with-google", {
+      const { data } = await axios.post("/api/auth/sign-in-with-google", {
         name: displayName,
         email: email,
         photoUrl: photoURL,
       });
 
-      dispatch(signInSuccess(res));
+      dispatch(signInSuccess(data));
       navigate("/");
     } catch (error) {
       console.log("Could not sign in with google", error);
     }
   };
+
   return (
     <button
       onClick={handleUseGoogle}

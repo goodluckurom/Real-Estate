@@ -1,6 +1,7 @@
 const User = require("../model/User");
-const errorHandler = require("../utils/error");
+const { errorHandler } = require("../utils/error");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 exports.signUp = async (req, res, next) => {
   const { username, email, password, confirmPassword } = req.body;
@@ -69,7 +70,6 @@ exports.signIn = async (req, res, next) => {
 exports.GoogleSignIn = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
-
     if (user) {
       const token = jwt.sign({ id: user._id }, "process.env.JWT_SECRET", {
         expiresIn: "1h",
@@ -83,25 +83,22 @@ exports.GoogleSignIn = async (req, res, next) => {
       const generatedPassword =
         Math.random().toString(36).slice(-8) +
         Math.random().toString(36).slice(-8);
-
+      const hashedPassword = await bcrypt.hash(generatedPassword, 10);
       const name =
         req.body.name.split(" ").join("").toLowerCase() +
         Math.random().toString(36).slice(-4);
-
+      const { email, photoUrl } = req.body;
       const newUser = new User({
         username: name,
-        email: req.body.email,
-        password: generatedPassword,
-        avatar: req.body.photoUrl,
+        email,
+        password: hashedPassword,
+        avatar: photoUrl,
       });
-
       await newUser.save();
-
       const token = jwt.sign({ id: newUser._id }, "process.env.JWT_SECRET", {
         expiresIn: "1h",
       });
       const { password: pass, ...rest } = newUser._doc;
-
       res
         .cookie("access_token", token, { httpOnly: true })
         .status(200)
