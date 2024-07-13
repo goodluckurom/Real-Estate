@@ -10,6 +10,8 @@ import ThemeSettings from "./component/ThemeSettings";
 import { useSelector } from "react-redux";
 import ProtectedRoute from "./component/ProtectedRoute";
 import RedirectIfAuthenticated from "./component/RedirectIfAuthenticated";
+import CreateListing from "./pages/CreateListing";
+import Listing from "./pages/Listing";
 
 const App = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -38,10 +40,12 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/listing/:id" element={<Listing />} />
 
           {/* protected routes */}
           <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<Profile />} />
+            <Route path="/create-listing" element={<CreateListing />} />
           </Route>
 
           {/* redirect routes.. */}

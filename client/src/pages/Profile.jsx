@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
   getDownloadURL,
   getStorage,
@@ -195,7 +195,14 @@ const Profile = () => {
         >
           {loading ? "Updating!..." : "Update"}
         </button>
+        <Link
+          to={"/create-listing"}
+          className="bg-accent text-white rounded-lg text-center hover:opacity-95 cursor-pointer p-3"
+        >
+          Create Listing
+        </Link>
       </form>
+
       <div className="flex justify-between mt-5">
         <span
           onClick={handleDeleteUser}
